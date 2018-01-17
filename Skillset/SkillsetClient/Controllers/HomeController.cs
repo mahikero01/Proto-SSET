@@ -21,19 +21,14 @@ namespace SkillsetClient.Controllers
     {
         private string _authToken;
         private string _apiToken;
-        private ILogger<HomeController> _logger;
-        private IConfiguration _config;
         private HttpClient _client;
         private TokenFactory _tokenFactory;
+        public string sample="sdaf";
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            IConfiguration config)
+        public HomeController()
         {
             _tokenFactory = new TokenFactory();
             _client = new HttpClient();
-            _logger = logger;
-            _config = config;
         }
 
         public IActionResult Index()
@@ -43,16 +38,17 @@ namespace SkillsetClient.Controllers
         public async Task<IActionResult> SignIn()
         {
             //request a post to IDP server to gain an AuthToken
-            await getAuthentication();
-            ProvideAuthorization();
-
+            //await getAuthentication();
+            //ProvideAuthorization();
+            ViewData["sample"] = Startup.Configuration["ClientServer:Url"];
             return View();
         }
 
         public async Task<IActionResult> getAuthentication()
         {
+            var a = Startup.Configuration["IDPServer:TokenRequestURL"];
             //var idpToken = await _client.PostAsync("http://localhost:60818/api/auth/token", null);
-            var idpToken = await _client.PostAsync(_config["IDPServer:TokenRequestURL"], null);
+            var idpToken = await _client.PostAsync(Startup.Configuration["IDPServer:TokenRequestURL"], null);
             if (idpToken.IsSuccessStatusCode)
             {
                 //Storing the response details recieved from web api   
@@ -75,7 +71,7 @@ namespace SkillsetClient.Controllers
                 //2)GenerateAuthorizationToken is used to generate Authorization token
                 var authorizationToken = _tokenFactory.GenerateAuthorizationToken(_tokenFactory.ExtractToken(authenticationToken));
 
-                //save to session
+                //save to session   
                 HttpContext.Session.SetString("apiToken", authorizationToken);
             }
         }
