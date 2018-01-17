@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SkillsetClient.Models;
 
 namespace SkillsetClient.Controllers
 {
@@ -12,11 +13,11 @@ namespace SkillsetClient.Controllers
     public class SkillsetController : Controller
     {
         // GET: api/Skillset
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<SS_Skillsets> Get()
+        //{
+        //    return ;
+        //}
 
         // GET: api/Skillset/5
         [HttpGet("{id}", Name = "Get")]

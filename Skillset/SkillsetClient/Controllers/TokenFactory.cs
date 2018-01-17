@@ -54,7 +54,7 @@ namespace SkillsetClient.Controllers
         {
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(
-                    Startup.Configuration["WebApiServer:IssuerSigningKey"]);
+                    Startup.Configuration["WebApiServer:IssuerSigningKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(

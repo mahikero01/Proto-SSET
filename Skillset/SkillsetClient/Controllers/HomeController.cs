@@ -75,7 +75,7 @@ namespace SkillsetClient.Controllers
                 //2)GenerateAuthorizationToken is used to generate Authorization token
                 var authorizationToken = _tokenFactory.GenerateAuthorizationToken(_tokenFactory.ExtractToken(authenticationToken));
 
-                //save to session
+                //save to session   
                 HttpContext.Session.SetString("apiToken", authorizationToken);
             }
         }
