@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SkillsetAPI.Entities;
 
 namespace SkillsetAPI
 {
@@ -41,8 +43,11 @@ namespace SkillsetAPI
                 };
             });
 
-            var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
-            //services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
+            //Use for migration only, then comment all statement in DB context constructor
+           var connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=SkillsetDB;Trusted_Connection=True";
+            
+            //var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
+            services.AddDbContext<SkillSetContext>(o => o.UseSqlServer(connectionString));
 
             services.AddMvc();
         }
