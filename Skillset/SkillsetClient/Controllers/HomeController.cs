@@ -24,11 +24,13 @@ namespace SkillsetClient.Controllers
         private ILogger<HomeController> _logger;
         private IConfiguration _config;
         private HttpClient _client;
+        private TokenFactory _tokenFactory;
 
         public HomeController(
             ILogger<HomeController> logger,
             IConfiguration config)
         {
+            _tokenFactory = new TokenFactory();
             _client = new HttpClient();
             _logger = logger;
             _config = config;
@@ -64,29 +66,18 @@ namespace SkillsetClient.Controllers
         //this method generates its authorization token that will consumed by web api server only
         public void ProvideAuthorization()
         {
-            var user = "mahikero";
+            //this is used to gather information about the client's identity
+            var authenticationToken = HttpContext.Session.GetString("authToken");
 
-            var claims = new[]
+            if (authenticationToken != null)
             {
-                 new Claim(ClaimTypes.Name, user),
-                 new Claim(ClaimTypes.Actor, "CocoM")
-            };
+                //1)Extracttoken is used to extract all details required before generating an authorization token
+                //2)GenerateAuthorizationToken is used to generate Authorization token
+                var authorizationToken = _tokenFactory.GenerateAuthorizationToken(_tokenFactory.ExtractToken(authenticationToken));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("03fb1760-a45f-4473-bed4-aab1e8d7e87a"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: "http://localhost:60812",
-                audience: "http://localhost:60822",
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
-                signingCredentials: creds
-            );
-
-
-            var myToken = new JwtSecurityTokenHandler().WriteToken(token);
-            JwtSecurityToken ax = new JwtSecurityToken();
-            HttpContext.Session.SetString("apiToken", myToken);
+                //save to session
+                HttpContext.Session.SetString("apiToken", authorizationToken);
+            }
         }
 
         public IActionResult Error()
