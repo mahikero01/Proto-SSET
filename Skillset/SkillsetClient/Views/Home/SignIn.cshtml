@@ -7,7 +7,9 @@
 
 
 <script>
-    var javacriptVariable = '@ViewData["sample"].ToString()';
-        alert(javacriptVariable);
+    var homePage = '@ViewData["homepage"].ToString()';
+    window.setTimeout(function () {
+        window.location.href = homePage ;
+    }, 1500);
 
 </script>
