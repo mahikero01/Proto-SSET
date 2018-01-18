@@ -33,14 +33,24 @@ namespace SkillsetClient.Controllers
 
         public IActionResult Index()
         {
+            _authToken = HttpContext.Session.GetString("authToken");
+            var a = HttpContext.Session.Get("authToken");
+            if (_authToken == null)
+            {
+                //get token for authentication
+                //change route to signIn
+                //this will create a token that can communicate to web api
+                //save to session
+                return Redirect("Home/SignIn");
+            }
             return View();
         }
         public async Task<IActionResult> SignIn()
         {
             //request a post to IDP server to gain an AuthToken
-            //await getAuthentication();
-            //ProvideAuthorization();
-            ViewData["sample"] = Startup.Configuration["ClientServer:Url"];
+            await getAuthentication();
+            ProvideAuthorization();
+            ViewData["homepage"] = Startup.Configuration["ClientServer:Url"];
             return View();
         }
 

@@ -1,28 +1,36 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillsetClient.Controllers
 {
     public class WebApiAccess
     {
         private string _apiURL;
+        public string _apiToken;
         private HttpClient _client;
 
         public WebApiAccess(string controller)
         {
             _apiURL = Startup.Configuration["WebApiServer:ApiURL"] ;
             _apiURL = _apiURL + "/" + controller;
-
+            
             //instantiate client
             _client = new HttpClient();
+
         }
+        
 
         public async Task<string> PostRequest(HttpContent body)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
             var request = await _client.PostAsync(_apiURL, body);
             if (request.IsSuccessStatusCode)
             {
@@ -55,6 +63,7 @@ namespace SkillsetClient.Controllers
 
         public async Task<string> GetRequest()
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
             var request = await _client.GetAsync(_apiURL);
             if (request.IsSuccessStatusCode)
             {
