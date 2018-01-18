@@ -71,7 +71,6 @@ namespace SkillsetClient.Controllers
 
         public async Task<string> GetRequest()
         {
-            AssignAuthorization();
             var request = await _client.GetAsync(_apiURL);
             if (request.IsSuccessStatusCode)
             {
@@ -84,7 +83,6 @@ namespace SkillsetClient.Controllers
 
         public async Task<string> GetRequest(string id)
         {
-            AssignAuthorization();
             var request = await _client.GetAsync(_apiURL+"/"+id);
             if (request.IsSuccessStatusCode)
             {
