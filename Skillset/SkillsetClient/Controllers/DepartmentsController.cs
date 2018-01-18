@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SkillsetClient.Models;
 
 namespace SkillsetClient.Controllers
 {
@@ -11,36 +13,60 @@ namespace SkillsetClient.Controllers
     [Route("api/Departments")]
     public class DepartmentsController : Controller
     {
+        private WebApiAccess _webApiAccess;
+
+        public DepartmentsController()
+        {
+            _webApiAccess = new WebApiAccess("Departments");
+        }
         // GET: api/Departments
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<SS_Departments[]> Get()
         {
-            return new string[] { "value1", "value2" };
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            var result = await _webApiAccess.GetRequest();
+            return JsonConvert.DeserializeObject<SS_Departments[]>(result.ToString());
         }
 
         // GET: api/Departments/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<SS_Departments> Get(int id)
         {
-            return "value";
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            var result = await _webApiAccess.GetRequest();
+            return JsonConvert.DeserializeObject<SS_Departments>(result.ToString());
         }
-        
+
         // POST: api/Departments
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<SS_Departments> Post([FromBody]SS_Departments body)
         {
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            var content = JsonConvert.SerializeObject(body);
+
+            var result = await _webApiAccess.PostRequest(content);
+            return JsonConvert.DeserializeObject<SS_Departments>(result.ToString());
         }
-        
+
         // PUT: api/Departments/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<SS_Departments> Put(int id, [FromBody]SS_Departments body)
         {
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            var content = JsonConvert.SerializeObject(body);
+
+            var result = await _webApiAccess.PutRequest(id.ToString(), content);
+            return JsonConvert.DeserializeObject<SS_Departments>(result.ToString());
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+
+            var result = await _webApiAccess.DeleteRequest(id.ToString());
+            return result;
         }
     }
 }

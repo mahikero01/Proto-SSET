@@ -17,15 +17,15 @@ namespace SkillsetClient.Controllers
         private WebApiAccess _webApiAccess;
         public SkillsetsController()
         {
-            _webApiAccess = new WebApiAccess("Skills");
+            _webApiAccess = new WebApiAccess("Skillsets");
         }
         // GET: api/Skillset
         [HttpGet]
         public async Task<SS_Skillsets[]> Get()
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
-            var skillsets = await _webApiAccess.GetRequest();
-            return JsonConvert.DeserializeObject<SS_Skillsets[]>(skillsets.ToString());
+            var result = await _webApiAccess.GetRequest();
+            return JsonConvert.DeserializeObject<SS_Skillsets[]>(result.ToString());
         }
 
         // GET: api/Skillset/5
@@ -33,30 +33,30 @@ namespace SkillsetClient.Controllers
         public async Task<SS_Skillsets> Get(int id)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
-            var skillsets = await _webApiAccess.GetRequest();
-            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
+            var result = await _webApiAccess.GetRequest();
+            return JsonConvert.DeserializeObject<SS_Skillsets>(result.ToString());
         }
 
         // POST: api/Skillset
         [HttpPost]
-        public async Task<SS_Skillsets> Post([FromBody]SS_Skillsets skillset)
+        public async Task<SS_Skillsets> Post([FromBody]SS_Skillsets body)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
-            var content = JsonConvert.SerializeObject(skillset);
+            var content = JsonConvert.SerializeObject(body);
 
-            var skillsets = await _webApiAccess.PostRequest(content);
-            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
+            var result = await _webApiAccess.PostRequest(content);
+            return JsonConvert.DeserializeObject<SS_Skillsets>(result.ToString());
         }
 
         // PUT: api/Skillset/5
         [HttpPut("{id}")]
-        public async Task<SS_Skillsets> Put(int id, [FromBody]SS_Skillsets skillset)
+        public async Task<SS_Skillsets> Put(int id, [FromBody]SS_Skillsets body)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
-            var content = JsonConvert.SerializeObject(skillset);
+            var content = JsonConvert.SerializeObject(body);
 
-            var skillsets = await _webApiAccess.PutRequest(id.ToString(), content);
-            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
+            var result = await _webApiAccess.PutRequest(id.ToString(), content);
+            return JsonConvert.DeserializeObject<SS_Skillsets>(result.ToString());
         }
 
         // DELETE: api/ApiWithActions/5
