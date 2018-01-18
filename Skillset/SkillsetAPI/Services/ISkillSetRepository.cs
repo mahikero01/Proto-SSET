@@ -14,6 +14,10 @@ namespace SkillsetAPI.Services
 
         IEnumerable<SetGroup> ReadSetGroups();
 
-        SetGroup ReadSetGroup(string userId);
+        SetGroup ReadSetGroup(string groupId);
+
+        IEnumerable<SetUserAccess> ReadSetUserAccesses();
+
+        SetUserAccess ReadSetUserAccess(int accessId);
     }
 }

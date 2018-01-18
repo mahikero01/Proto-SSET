@@ -34,5 +34,15 @@ namespace SkillsetAPI.Services
         {
             return _ctx.SetGroups.Where(g => g.grp_id == groupId).FirstOrDefault();
         }
+
+        public IEnumerable<SetUserAccess> ReadSetUserAccesses()
+        {
+            return _ctx.SetUserAccesses.OrderBy(a => a.user_grp_id).ToList();
+        }
+
+        public SetUserAccess ReadSetUserAccess(int accessId)
+        {
+            return _ctx.SetUserAccesses.Where(a => a.user_grp_id == accessId).FirstOrDefault();
+        }
     }
 }
