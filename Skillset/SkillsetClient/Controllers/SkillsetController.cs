@@ -51,8 +51,13 @@ namespace SkillsetClient.Controllers
         
         // PUT: api/Skillset/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<SS_Skillsets> Put(int id, [FromBody]SS_Skillsets skillset)
         {
+            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            var content = JsonConvert.SerializeObject(skillset);
+
+            var skillsets = await _webApiAccess.PutRequest(id.ToString(),content);
+            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
         }
         
         // DELETE: api/ApiWithActions/5
