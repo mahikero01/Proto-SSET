@@ -26,20 +26,26 @@ namespace SkillsetClient.Controllers
         {
             _webApiAccess._apiToken = HttpContext.Session.GetString("apiToken");
             var skillsets = await _webApiAccess.GetRequest();
-            return  JsonConvert.DeserializeObject<SS_Skillsets[]>(skillsets.ToString());
+            return JsonConvert.DeserializeObject<SS_Skillsets[]>(skillsets.ToString());
         }
 
         // GET: api/Skillset/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<SS_Skillsets> Get(int id)
         {
-            return "value";
+            _webApiAccess._apiToken = HttpContext.Session.GetString("apiToken");
+            var skillsets = await _webApiAccess.GetRequest();
+            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
         }
-        
+
         // POST: api/Skillset
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<SS_Skillsets> Post([FromBody]SS_Skillsets skillset)
         {
+            _webApiAccess._apiToken = HttpContext.Session.GetString("apiToken");
+            var content = JsonConvert.SerializeObject(skillset);
+            var skillsets = await _webApiAccess.PostRequest(content);
+            return JsonConvert.DeserializeObject<SS_Skillsets>(skillsets.ToString());
         }
         
         // PUT: api/Skillset/5

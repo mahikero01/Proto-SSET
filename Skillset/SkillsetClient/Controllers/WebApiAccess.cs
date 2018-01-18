@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace SkillsetClient.Controllers
 {
@@ -28,10 +29,13 @@ namespace SkillsetClient.Controllers
         }
         
 
-        public async Task<string> PostRequest(HttpContent body)
+        public async Task<string> PostRequest(string body)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
-            var request = await _client.PostAsync(_apiURL, body);
+
+            var content = new StringContent(body, Encoding.UTF8, "application/json");
+          
+            var request = await _client.PostAsync(_apiURL, content);
             if (request.IsSuccessStatusCode)
             {
                 var result = request.Content.ReadAsStringAsync().Result;
