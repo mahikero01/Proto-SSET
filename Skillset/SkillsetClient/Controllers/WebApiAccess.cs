@@ -15,7 +15,7 @@ namespace SkillsetClient.Controllers
     public class WebApiAccess
     {
         private string _apiURL;
-        public string _apiToken;
+        private string _apiToken;
         private HttpClient _client;
 
         public WebApiAccess(string controller)
@@ -27,15 +27,19 @@ namespace SkillsetClient.Controllers
             _client = new HttpClient();
 
         }
-        
+
+        public void AssignAuthorization(string token)
+        {
+            _apiToken = token;
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
+        }
+
 
         public async Task<string> PostRequest(string body)
-        {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
-
+        {   
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-          
             var request = await _client.PostAsync(_apiURL, content);
+
             if (request.IsSuccessStatusCode)
             {
                 var result = request.Content.ReadAsStringAsync().Result;
@@ -67,7 +71,7 @@ namespace SkillsetClient.Controllers
 
         public async Task<string> GetRequest()
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
+            AssignAuthorization();
             var request = await _client.GetAsync(_apiURL);
             if (request.IsSuccessStatusCode)
             {
@@ -80,6 +84,7 @@ namespace SkillsetClient.Controllers
 
         public async Task<string> GetRequest(string id)
         {
+            AssignAuthorization();
             var request = await _client.GetAsync(_apiURL+"/"+id);
             if (request.IsSuccessStatusCode)
             {
