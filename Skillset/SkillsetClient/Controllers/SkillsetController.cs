@@ -51,7 +51,7 @@ namespace SkillsetClient.Controllers
         
         // PUT: api/Skillset/5
         [HttpPut("{id}")]
-        public async Task<SS_Skillsets> Put(int id, [FromBody]SS_Skillsets skillset)
+        public async Task<SS_Skillsets> Update(int id, [FromBody]SS_Skillsets skillset)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var content = JsonConvert.SerializeObject(skillset);

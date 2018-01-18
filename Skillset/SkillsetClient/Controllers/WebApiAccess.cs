@@ -52,7 +52,8 @@ namespace SkillsetClient.Controllers
         public async Task<string> PutRequest(string id,string body)
         {
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-            var request = await _client.PutAsync(_apiURL+"/"+id, content);
+            var apiUrl = _apiURL + "/" + id;
+            var request = await _client.PutAsync(apiUrl, content);
             if (request.IsSuccessStatusCode)
             {
                 var result = request.Content.ReadAsStringAsync().Result;
