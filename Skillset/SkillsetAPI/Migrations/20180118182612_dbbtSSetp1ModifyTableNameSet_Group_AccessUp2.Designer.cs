@@ -11,9 +11,10 @@ using System;
 namespace SkillsetAPI.Migrations
 {
     [DbContext(typeof(SkillSetContext))]
-    partial class SkillSetContextModelSnapshot : ModelSnapshot
+    [Migration("20180118182612_dbbtSSetp1ModifyTableNameSet_Group_AccessUp2")]
+    partial class dbbtSSetp1ModifyTableNameSet_Group_AccessUp2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,30 +38,6 @@ namespace SkillsetAPI.Migrations
                     b.HasKey("grp_id");
 
                     b.ToTable("set_group");
-                });
-
-            modelBuilder.Entity("SkillsetAPI.Entities.SetGroupAccess", b =>
-                {
-                    b.Property<int>("grp_mod_id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("can_add");
-
-                    b.Property<bool>("can_delete");
-
-                    b.Property<bool>("can_edit");
-
-                    b.Property<bool>("can_view");
-
-                    b.Property<string>("grp_id")
-                        .HasMaxLength(25);
-
-                    b.Property<string>("mod_id")
-                        .HasMaxLength(25);
-
-                    b.HasKey("grp_mod_id");
-
-                    b.ToTable("set_group_access");
                 });
 
             modelBuilder.Entity("SkillsetAPI.Entities.SetModule", b =>

@@ -48,8 +48,9 @@ namespace SkillsetAPI
 
             //Use for migration only, then comment all statement in DB context constructor
             //var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=dbbtSSetp1;Trusted_Connection=True";
-
+            //Use below in Production
             var connectionString = Startup.Configuration["connectionStrings:dbbtSSetp1ConnectionString"];
+
             services.AddDbContext<SkillSetContext>(o => o.UseSqlServer(connectionString));
 
             services.AddScoped<ISkillSetRepository, SkillSetRepository>();
@@ -70,6 +71,7 @@ namespace SkillsetAPI
                     cfg => 
                     {
                         cfg.CreateMap<Entities.SetUser, Models.SetUserDTO>();
+                        cfg.CreateMap<Entities.SetGroup, Models.SetGroupDTO>();
                     });
 
             app.UseMvc();
