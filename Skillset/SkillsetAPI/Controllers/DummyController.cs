@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SkillsetAPI.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SkillsetAPI.Controllers
 {
+    [Authorize]
     //Use this controller only for creating databse via migration and testing
     public class DummyController : Controller
     {

@@ -8,8 +8,12 @@ namespace SkillsetAPI.Services
 {
     public interface ISkillSetRepository
     {
-        IEnumerable<SetUser> GetSetUsers();
+        IEnumerable<SetUser> ReadSetUsers();
 
-        void AddSetUser(SetUser setUser);
+        SetUser ReadSetUser(string userId);
+
+        IEnumerable<SetGroup> ReadSetGroups();
+
+        SetGroup ReadSetGroup(string userId);
     }
 }

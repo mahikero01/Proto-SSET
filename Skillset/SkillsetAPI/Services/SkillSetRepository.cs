@@ -15,14 +15,24 @@ namespace SkillsetAPI.Services
             _ctx = ctx;
         }
 
-        public IEnumerable<SetUser> GetSetUsers()
+        public IEnumerable<SetUser> ReadSetUsers()
         {
-            return _ctx.SetUsers.OrderBy(s => s.user_name).ToList();
+            return _ctx.SetUsers.OrderBy(u => u.user_name).ToList();
         }
 
-        public void AddSetUser(SetUser setUser)
+        public SetUser ReadSetUser(string userId)
         {
-            throw new NotImplementedException();
+            return _ctx.SetUsers.Where(u => u.user_id == userId).FirstOrDefault();
+        }
+
+        public IEnumerable<SetGroup> ReadSetGroups()
+        {
+            return _ctx.SetGroups.OrderBy(g => g.grp_name).ToList();
+        }
+
+        public SetGroup ReadSetGroup(string groupId)
+        {
+            return _ctx.SetGroups.Where(g => g.grp_id == groupId).FirstOrDefault();
         }
     }
 }
