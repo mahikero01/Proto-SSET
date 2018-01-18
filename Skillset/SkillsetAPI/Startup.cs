@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SkillsetAPI.Entities;
+using SkillsetAPI.Services;
 
 namespace SkillsetAPI
 {
@@ -43,22 +44,33 @@ namespace SkillsetAPI
                 };
             });
 
+            services.AddMvc();
+
             //Use for migration only, then comment all statement in DB context constructor
-           var connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=SkillsetDB;Trusted_Connection=True";
-            
-            //var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
+            //var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=dbbtSSetp1;Trusted_Connection=True";
+
+            var connectionString = Startup.Configuration["connectionStrings:dbbtSSetp1ConnectionString"];
             services.AddDbContext<SkillSetContext>(o => o.UseSqlServer(connectionString));
 
-            services.AddMvc();
+            services.AddScoped<ISkillSetRepository, SkillSetRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SkillSetContext skillSetContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //This is for Seeding comment this when ading migration
+            skillSetContext.EnsureSeedDataForContext();
+
+            AutoMapper.Mapper.Initialize(
+                    cfg => 
+                    {
+                        cfg.CreateMap<Entities.SetUser, Models.SetUserDTO>();
+                    });
 
             app.UseMvc();
         }

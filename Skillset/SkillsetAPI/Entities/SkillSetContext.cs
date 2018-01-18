@@ -10,10 +10,13 @@ namespace SkillsetAPI.Entities
     {
         public SkillSetContext(DbContextOptions<SkillSetContext> options) : base(options)
         {
-            Database.EnsureCreated();
-            //Database.Migrate();
+            //This is only used for testing not for production
+            //Database.EnsureCreated();
+
+            //Comment below for using add-migration or changing the tables
+            Database.Migrate();
         }
 
-        public DbSet<SetUsers> SetUsers { get; set; }
+        public DbSet<SetUser> SetUsers { get; set; }
     }
 }

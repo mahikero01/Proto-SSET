@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SkillsetAPI.Entities
 {
     [Table("set_user")]
-    public class SetUsers
+    public class SetUser
     {
         [Key]
         [MaxLength(25)]
