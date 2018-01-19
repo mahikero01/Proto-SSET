@@ -10,32 +10,32 @@ using SkillsetClient.Models;
 namespace SkillsetClient.Controllers
 {
     [Produces("application/json")]
-    [Route("api/SetGroups")]
-    public class SetGroupsController : Controller
+    [Route("api/SetUserAccesses")]
+    public class SetUserAccessesController : Controller
     {
-        // GET: api/SetGroups
         private WebApiAccess _webApiAccess;
 
-        public SetGroupsController()
+        public SetUserAccessesController()
         {
-            _webApiAccess = new WebApiAccess("SetGroups");
+            _webApiAccess = new WebApiAccess("SetUserAcesses");
         }
-
+        // GET: api/SetUserAccesses
         [HttpGet]
-        public async Task<SetGroup[]> Get()
+        public async Task<SetUserAccess[]> Get()
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var result = await _webApiAccess.GetRequest();
-            return JsonConvert.DeserializeObject<SetGroup[]>(result.ToString());
+            return JsonConvert.DeserializeObject<SetUserAccess[]>(result.ToString());
         }
 
-        // GET: api/SetGroups/5
+        // GET: api/SetUserAccesses/5
         [HttpGet("{id}")]
-        public async Task<SS_Skillsets> Get(string id)
+        public async Task<SetUserAccess> Get(int id)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var result = await _webApiAccess.GetRequest();
-            return JsonConvert.DeserializeObject<SS_Skillsets>(result.ToString());
-        }
+            return JsonConvert.DeserializeObject<SetUserAccess>(result.ToString());
+        }  
+       
     }
 }
