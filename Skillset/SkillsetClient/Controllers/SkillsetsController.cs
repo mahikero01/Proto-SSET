@@ -29,7 +29,7 @@ namespace SkillsetClient.Controllers
         }
 
         // GET: api/Skillset/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public async Task<SS_Skillsets> Get(int id)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
