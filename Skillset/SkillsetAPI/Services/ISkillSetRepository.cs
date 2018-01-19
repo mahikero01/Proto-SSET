@@ -19,5 +19,15 @@ namespace SkillsetAPI.Services
         IEnumerable<SetUserAccess> ReadSetUserAccesses();
 
         SetUserAccess ReadSetUserAccess(int accessId);
+
+        IEnumerable<Associate> ReadAssociates();
+
+        Associate ReadAssociate(int ascId);
+
+        void CreateAssociate(Associate associate);
+
+        void DeleteAssociate(Associate associate);
+
+        bool Save();
     }
 }

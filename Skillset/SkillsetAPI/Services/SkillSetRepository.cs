@@ -44,5 +44,30 @@ namespace SkillsetAPI.Services
         {
             return _ctx.SetUserAccesses.Where(a => a.user_grp_id == accessId).FirstOrDefault();
         }
+
+        public IEnumerable<Associate> ReadAssociates()
+        {
+            return _ctx.Associates.OrderBy(a => a.AssociateID).ToList();
+        }
+
+        public Associate ReadAssociate(int ascId)
+        {
+            return _ctx.Associates.Where(a => a.AssociateID == ascId).FirstOrDefault();
+        }
+
+        public void CreateAssociate(Associate associate)
+        {
+            _ctx.Associates.Add(associate);
+        }
+
+        public void DeleteAssociate(Associate associate)
+        {
+            _ctx.Associates.Remove(associate);
+        }
+
+        public bool Save()
+        {
+            return (_ctx.SaveChanges() >= 0);
+        }
     }
 }

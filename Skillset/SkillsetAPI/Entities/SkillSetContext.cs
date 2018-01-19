@@ -22,5 +22,6 @@ namespace SkillsetAPI.Entities
         public DbSet<SetUserAccess> SetUserAccesses { get; set; }
         public DbSet<SetModule> SetModules { get; set; }
         public DbSet<SetGroupAccess> SetGroupAccesses { get; set; }
+        public DbSet<Associate> Associates { get; set; }
     }
 }

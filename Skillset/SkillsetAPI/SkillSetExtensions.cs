@@ -16,6 +16,7 @@ namespace SkillsetAPI
             SeedSetUserAccess(ctx);
             SeedSetModules(ctx);
             SeedSetGroupAccess(ctx);
+            SeedAssociate(ctx);
         }
 
         private static void SeedSetUsers(SkillSetContext ctx)
@@ -163,6 +164,41 @@ namespace SkillsetAPI
                     };
 
             ctx.SetGroupAccesses.AddRange(setGroupAccesses);
+            ctx.SaveChanges();
+        }
+
+        private static void SeedAssociate(SkillSetContext ctx)
+        {
+            if (ctx.Associates.Any())
+            {
+                return;
+            }
+
+            var associates = new List<Associate>()
+                    {
+                        new Associate()
+                        {
+                            UserID = "USER-20150428-001",
+                            PhoneNumber = "22-88-7584",
+                            VPN = true,
+                            DepartmentID = 1,
+                            LocationID = 1,
+                            UpdatedOn = new DateTime(2017,04,28,19,05,40),
+                            IsActive = true
+                        },
+                        new Associate()
+                        {
+                            UserID = "USER-20171128-002",
+                            PhoneNumber = "22-88-7584",
+                            VPN = true,
+                            DepartmentID = 1,
+                            LocationID = 1,
+                            UpdatedOn = new DateTime(2015,11,28,19,05,40),
+                            IsActive = true
+                        }
+                    };
+
+            ctx.Associates.AddRange(associates);
             ctx.SaveChanges();
         }
     }

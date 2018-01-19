@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace SkillsetAPI.Controllers
 {
-    [Authorize]
     //Use this controller only for creating databse via migration and testing
     public class DummyController : Controller
     {
@@ -20,7 +19,8 @@ namespace SkillsetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/testctx")]
+        [Route("api/23205c89-6498-45e4-a9e9-584e5bcb841c")]
+        //[Route("api/ctx")]
         public IActionResult TestCTX()
         {
             return Ok();
