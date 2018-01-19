@@ -38,61 +38,101 @@ namespace SkillsetClient.Controllers
         public async Task<string> PostRequest(string body)
         {   
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-            var request = await _client.PostAsync(_apiURL, content);
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var result = request.Content.ReadAsStringAsync().Result;
-                return result;
-            }
+                var request = await _client.PostAsync(_apiURL, content);
 
-            return null;
+                if (request.IsSuccessStatusCode)
+                {
+                    var result = request.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<string> PutRequest(string id,string body)
         {
             var content = new StringContent(body, Encoding.UTF8, "application/json");
             var apiUrl = _apiURL + "/" + id;
-            var request = await _client.PutAsync(apiUrl, content);
-            if (request.IsSuccessStatusCode)
-            {
-                var result = request.Content.ReadAsStringAsync().Result;
-                return result;
-            }
 
-            return null;
+            try
+            {
+                var request = await _client.PutAsync(apiUrl, content);
+
+                if (request.IsSuccessStatusCode)
+                {
+                    var result = request.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<bool> DeleteRequest(string id)
         {
-            var request = await _client.DeleteAsync(_apiURL+"/"+id);
-            bool isSuccess = request.IsSuccessStatusCode;
+            bool isSuccess = false;
+            try
+            {
+                var request = await _client.DeleteAsync(_apiURL + "/" + id);
+
+                isSuccess = request.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
             
             return isSuccess;
         }
 
         public async Task<string> GetRequest()
         {
-            var request = await _client.GetAsync(_apiURL);
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var result = request.Content.ReadAsStringAsync().Result;
-                return result;
+                var request = await _client.GetAsync(_apiURL);
+                if (request.IsSuccessStatusCode)
+                {
+                    var result = request.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
             }
 
-            return null;
         }
 
         public async Task<string> GetRequest(string id)
         {
-            var request = await _client.GetAsync(_apiURL+"/"+id);
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var result = request.Content.ReadAsStringAsync().Result;
-                return result;
-            }
+                var request = await _client.GetAsync(_apiURL + "/" + id);
+                if (request.IsSuccessStatusCode)
+                {
+                    var result = request.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
 
-            return null;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
