@@ -12,13 +12,13 @@ using System.Text;
 
 namespace SkillsetClient.Controllers
 {
-    public class WebApiAccess
+    public class ApiAccess
     {
         private string _apiURL;
         private string _apiToken;
         private HttpClient _client;
 
-        public WebApiAccess(string controller)
+        public ApiAccess(string controller)
         {
             _apiURL = Startup.Configuration["WebApiServer:ApiURL"] ;
             _apiURL = _apiURL + "/" + controller;

@@ -13,11 +13,11 @@ namespace SkillsetClient.Controllers
     [Route("api/AssociateDepartmentSkillsets")]
     public class AssociateDepartmentSkillsetsController : Controller
     {
-        private WebApiAccess _webApiAccess;
+        private ApiAccess _webApiAccess;
 
         public AssociateDepartmentSkillsetsController()
         {
-            _webApiAccess = new WebApiAccess("AssociateDepartmentSkillsets");
+            _webApiAccess = new ApiAccess("AssociateDepartmentSkillsets");
         }
         // GET: api/AssociateDepartmentSkillsets
         [HttpGet]

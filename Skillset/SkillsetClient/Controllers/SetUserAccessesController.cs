@@ -13,11 +13,11 @@ namespace SkillsetClient.Controllers
     [Route("api/SetUserAccesses")]
     public class SetUserAccessesController : Controller
     {
-        private WebApiAccess _webApiAccess;
+        private ApiAccess _webApiAccess;
 
         public SetUserAccessesController()
         {
-            _webApiAccess = new WebApiAccess("SetUserAcesses");
+            _webApiAccess = new ApiAccess("SetUserAcesses");
         }
         // GET: api/SetUserAccesses
         [HttpGet]

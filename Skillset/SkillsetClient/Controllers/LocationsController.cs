@@ -14,11 +14,11 @@ namespace SkillsetClient.Controllers
     public class LocationsController : Controller
     {
         // GET: api/Locations
-        private WebApiAccess _webApiAccess;
+        private ApiAccess _webApiAccess;
 
         public LocationsController()
         {
-            _webApiAccess = new WebApiAccess("Locations");
+            _webApiAccess = new ApiAccess("Locations");
         }
         // GET: api/Location
         [HttpGet]

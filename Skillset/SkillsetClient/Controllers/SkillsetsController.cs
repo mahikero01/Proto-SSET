@@ -14,10 +14,10 @@ namespace SkillsetClient.Controllers
     public class SkillsetsController : Controller
     {
         // GET: api/Skillsets
-        private WebApiAccess _webApiAccess;
+        private ApiAccess _webApiAccess;
         public SkillsetsController()
         {
-            _webApiAccess = new WebApiAccess("Skillsets");
+            _webApiAccess = new ApiAccess("Skillsets");
         }
         // GET: api/Skillset
         [HttpGet]

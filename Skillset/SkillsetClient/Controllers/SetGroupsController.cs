@@ -14,11 +14,11 @@ namespace SkillsetClient.Controllers
     public class SetGroupsController : Controller
     {
         // GET: api/SetGroups
-        private WebApiAccess _webApiAccess;
+        private ApiAccess _webApiAccess;
 
         public SetGroupsController()
         {
-            _webApiAccess = new WebApiAccess("SetGroups");
+            _webApiAccess = new ApiAccess("SetGroups");
         }
 
         [HttpGet]
