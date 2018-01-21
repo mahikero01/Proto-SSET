@@ -47,7 +47,7 @@ namespace SkillsetAPI.Controllers
 
         //POST: api/Associates
         [HttpPost()]
-        public IActionResult PostAssociate([FromBody] Associate associate)
+        public IActionResult PostAssociate([FromBody] AssociateForCreateDTO associate)
         {
             if (associate == null)
             {
@@ -59,7 +59,9 @@ namespace SkillsetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            _skillSetRepository.CreateAssociate(associate);
+            var newAssociateEntity = Mapper.Map<Entities.Associate> (associate);
+
+            _skillSetRepository.CreateAssociate(newAssociateEntity);
 
             if (!_skillSetRepository.Save())
             {
@@ -67,7 +69,7 @@ namespace SkillsetAPI.Controllers
             }
 
             return CreatedAtRoute("GetAssociate",
-                    new { id = associate.AssociateID }, associate);
+                    new { id = newAssociateEntity.AssociateID }, associate);
         }
 
         //PUT: api/Associates
