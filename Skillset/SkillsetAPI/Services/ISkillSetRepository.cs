@@ -8,6 +8,8 @@ namespace SkillsetAPI.Services
 {
     public interface ISkillSetRepository
     {
+        bool Save();
+
         IEnumerable<SetUser> ReadSetUsers();
 
         SetUser ReadSetUser(string userId);
@@ -28,6 +30,12 @@ namespace SkillsetAPI.Services
 
         void DeleteAssociate(Associate associate);
 
-        bool Save();
+        IEnumerable<Department> ReadDepartments();
+
+        Department ReadDepartment(int depId);
+
+        void CreateDepartment(Department department);
+
+        void DeleteDepartment(Department department);
     }
 }

@@ -61,6 +61,8 @@ namespace SkillsetAPI.Controllers
 
             var newAssociateEntity = Mapper.Map<Entities.Associate> (associate);
 
+            newAssociateEntity.UpdatedOn = DateTime.Now;
+            newAssociateEntity.IsActive = true;
             _skillSetRepository.CreateAssociate(newAssociateEntity);
 
             if (!_skillSetRepository.Save())
@@ -69,7 +71,7 @@ namespace SkillsetAPI.Controllers
             }
 
             return CreatedAtRoute("GetAssociate",
-                    new { id = newAssociateEntity.AssociateID }, associate);
+                    new { id = newAssociateEntity.AssociateID }, newAssociateEntity);
         }
 
         //PUT: api/Associates
@@ -93,6 +95,7 @@ namespace SkillsetAPI.Controllers
             }
 
             Mapper.Map(associate, associateEntity);
+            associateEntity.UpdatedOn = DateTime.Now;
 
             if (!_skillSetRepository.Save())
             {
@@ -102,7 +105,7 @@ namespace SkillsetAPI.Controllers
             return NoContent();
         }
 
-        //DELETE: api/Associates
+        //DELETE: api/Associates/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteAssociate(int id)
         {

@@ -15,6 +15,11 @@ namespace SkillsetAPI.Services
             _ctx = ctx;
         }
 
+        public bool Save()
+        {
+            return (_ctx.SaveChanges() >= 0);
+        }
+
         public IEnumerable<SetUser> ReadSetUsers()
         {
             return _ctx.SetUsers.OrderBy(u => u.user_name).ToList();
@@ -65,9 +70,24 @@ namespace SkillsetAPI.Services
             _ctx.Associates.Remove(associate);
         }
 
-        public bool Save()
+        public IEnumerable<Department> ReadDepartments()
         {
-            return (_ctx.SaveChanges() >= 0);
+            return _ctx.Departments.OrderBy(d => d.DepartmentDescr).ToList();
+        }
+
+        public Department ReadDepartment(int depId)
+        {
+            return _ctx.Departments.Where(d => d.DepartmentId == depId).FirstOrDefault();
+        }
+
+        public void CreateDepartment(Department department)
+        {
+            _ctx.Departments.Add(department);
+        }
+
+        public void DeleteDepartment(Department department)
+        {
+            _ctx.Departments.Remove(department);
         }
     }
 }

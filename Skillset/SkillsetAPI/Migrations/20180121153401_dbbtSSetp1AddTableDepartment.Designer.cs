@@ -11,9 +11,10 @@ using System;
 namespace SkillsetAPI.Migrations
 {
     [DbContext(typeof(SkillSetContext))]
-    partial class SkillSetContextModelSnapshot : ModelSnapshot
+    [Migration("20180121153401_dbbtSSetp1AddTableDepartment")]
+    partial class dbbtSSetp1AddTableDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,22 +45,6 @@ namespace SkillsetAPI.Migrations
                     b.HasKey("AssociateID");
 
                     b.ToTable("SS_Associates");
-                });
-
-            modelBuilder.Entity("SkillsetAPI.Entities.Department", b =>
-                {
-                    b.Property<int>("DepartmentId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DepartmentDescr")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.Property<bool>("IsActive");
-
-                    b.HasKey("DepartmentId");
-
-                    b.ToTable("SS_Departments");
                 });
 
             modelBuilder.Entity("SkillsetAPI.Entities.SetGroup", b =>

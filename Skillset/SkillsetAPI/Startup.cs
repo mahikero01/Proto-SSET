@@ -74,6 +74,8 @@ namespace SkillsetAPI
                         cfg.CreateMap<Entities.SetGroup, Models.SetGroupDTO>();
                         cfg.CreateMap<Models.AssociateForCreateDTO, Entities.Associate>();
                         cfg.CreateMap<Models.AssociateForUpdateDTO, Entities.Associate>();
+                        cfg.CreateMap<Models.DepartmentForCreateDTO, Entities.Department>();
+                        cfg.CreateMap<Models.DepartmentForUpdateDTO, Entities.Department>();
                     });
 
             app.UseMvc();

@@ -17,6 +17,7 @@ namespace SkillsetAPI
             SeedSetModules(ctx);
             SeedSetGroupAccess(ctx);
             SeedAssociate(ctx);
+            SeedDepartment(ctx);
         }
 
         private static void SeedSetUsers(SkillSetContext ctx)
@@ -199,6 +200,31 @@ namespace SkillsetAPI
                     };
 
             ctx.Associates.AddRange(associates);
+            ctx.SaveChanges();
+        }
+
+        private static void SeedDepartment(SkillSetContext ctx)
+        {
+            if (ctx.Departments.Any())
+            {
+                return;
+            }
+
+            var departments = new List<Department>()
+                    {
+                        new Department()
+                        {
+                            DepartmentDescr = "Admin",
+                            IsActive = true
+                        },
+                        new Department()
+                        {
+                            DepartmentDescr = "Marketing",
+                            IsActive = true
+                        }
+                    };
+
+            ctx.Departments.AddRange(departments);
             ctx.SaveChanges();
         }
     }

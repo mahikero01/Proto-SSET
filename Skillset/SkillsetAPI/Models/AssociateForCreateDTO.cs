@@ -24,11 +24,5 @@ namespace SkillsetAPI.Models
 
         [Required(ErrorMessage = "No LocationID")]
         public int LocationID { get; set; }
-
-        [Required(ErrorMessage = "No UpdatedOn")]
-        public DateTime UpdatedOn { get; set; }
-
-        [Required(ErrorMessage = "No IsActive")]
-        public bool IsActive { get; set; }
     }
 }
