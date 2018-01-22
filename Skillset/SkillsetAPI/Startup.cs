@@ -74,12 +74,12 @@ namespace SkillsetAPI
                         cfg.CreateMap<Entities.SetUser, Models.SetUserDTO>();
                         cfg.CreateMap<Entities.SetGroup, Models.SetGroupDTO>();
                         cfg.CreateMap<Models.AssociateForCreateDTO, Entities.Associate>()
-                                .ForMember(dest => dest.UpdatedOn, opt => opt.Equals(DateTime.Now))
-                                .ForMember(dest => dest.IsActive, opt => opt.Equals(true));
+                                .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(o => DateTime.Now))
+                                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
                         cfg.CreateMap<Models.AssociateForUpdateDTO, Entities.Associate>()
-                                .ForMember(dest => dest.UpdatedOn, opt => opt.Equals(DateTime.Now));
+                                .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(o => DateTime.Now));
                         cfg.CreateMap<Models.DepartmentForCreateDTO, Entities.Department>()
-                                .ForMember(dest => dest.IsActive, opt => opt.Equals(true));
+                                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
                         cfg.CreateMap<Models.DepartmentForUpdateDTO, Entities.Department>();
                     });
 
