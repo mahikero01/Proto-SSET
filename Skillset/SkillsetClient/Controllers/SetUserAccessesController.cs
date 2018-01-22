@@ -17,13 +17,13 @@ namespace SkillsetClient.Controllers
 
         public SetUserAccessesController()
         {
-            _webApiAccess = new ApiAccess("SetUserAcesses");
+            _webApiAccess = new ApiAccess("SetUserAccesses");
         }
         // GET: api/SetUserAccesses
         [HttpGet]
         public async Task<SetUserAccess[]> Get()
         {
-            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            //_webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var result = await _webApiAccess.GetRequest();
             return JsonConvert.DeserializeObject<SetUserAccess[]>(result.ToString());
         }
