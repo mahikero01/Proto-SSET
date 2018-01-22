@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 
 namespace SkillsetClient
 {
@@ -39,6 +40,18 @@ namespace SkillsetClient
 
                 };
             });
+
+            //this will make JSON as statement case
+            services.AddMvc()
+                    .AddJsonOptions(o =>
+                    {
+                        if (o.SerializerSettings.ContractResolver != null)
+                        {
+                            var castedResolver = o.SerializerSettings.ContractResolver
+                                    as DefaultContractResolver;
+                            castedResolver.NamingStrategy = null;
+                        }
+                    });
 
             services.AddSession();
             services.AddMvc();

@@ -67,6 +67,10 @@ namespace SkillsetClient.Controllers
                 signingCredentials: creds
             );
 
+            System.Diagnostics.Debug.WriteLine(Startup.Configuration["WebApiServer:IssuerSigningKey"]);
+            System.Diagnostics.Debug.WriteLine(Startup.Configuration["WebApiServer:ValidAudience"]);
+            System.Diagnostics.Debug.WriteLine(Startup.Configuration["WebApiServer:ValidIssuer"]);
+
             var myToken = new JwtSecurityTokenHandler().WriteToken(token);
 
             return myToken;
