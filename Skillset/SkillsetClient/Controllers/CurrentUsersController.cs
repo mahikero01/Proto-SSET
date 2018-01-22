@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SkillsetClient.Models;
 
 namespace SkillsetClient.Controllers
@@ -14,7 +15,7 @@ namespace SkillsetClient.Controllers
     {
         // GET: api/CurrentUsers
         [HttpGet]
-        public CurrentUser Get()
+        public string Get()
         {
             CurrentUser currentUser = new CurrentUser();
             var username = Environment.UserName;
@@ -26,7 +27,7 @@ namespace SkillsetClient.Controllers
             var users =setUsersController.Get().Result;
             var groups = setGroupsController.Get().Result;
             var userAccesses = setUserAccessController.Get().Result;
-            var user = users.Where(x => x.user_name == username).First();
+            var user = users.Where(x => x.user_name == username).FirstOrDefault();
 
             if (user != null)
             {
@@ -43,7 +44,7 @@ namespace SkillsetClient.Controllers
                 }
             }
 
-            return currentUser;
+            return JsonConvert.SerializeObject(currentUser);
         }
     }
 }
