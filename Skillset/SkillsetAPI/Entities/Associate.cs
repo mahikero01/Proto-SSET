@@ -14,6 +14,9 @@ namespace SkillsetAPI.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AssociateID { get; set; }
 
+        [MaxLength(100)]
+        public string FullName { get; set; }
+
         [MaxLength(25)]
         public string UserID { get; set; }
 

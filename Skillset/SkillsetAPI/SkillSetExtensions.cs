@@ -182,6 +182,7 @@ namespace SkillsetAPI
                     {
                         new Associate()
                         {
+                            FullName = "Federico Sarmiento",
                             UserID = "USER-20150428-001",
                             PhoneNumber = "22-88-7584",
                             VPN = true,
@@ -192,6 +193,7 @@ namespace SkillsetAPI
                         },
                         new Associate()
                         {
+                            FullName = "Erso Alvarez",
                             UserID = "USER-20171128-002",
                             PhoneNumber = "22-88-7584",
                             VPN = true,
