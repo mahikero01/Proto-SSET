@@ -44,6 +44,8 @@ namespace SkillsetClient.Controllers
             AddToClaim(names);
             AddToClaim(roles);
             AddToClaim(urls);
+            AddToClaim(firstNames);
+            AddToClaim(surnames);
 
             claims = _claims;
 

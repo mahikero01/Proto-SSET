@@ -48,23 +48,41 @@ namespace SkillsetClient.Controllers
         public async Task<IActionResult> SignIn()
         {
             //request a post to IDP server to gain an AuthToken
-            //await getAuthentication();
+            getAuthentication();
             ProvideAuthorization();
             ViewData["homepage"] = Startup.Configuration["ClientServer:Url"];
             return View();
         }
 
-        public async Task<IActionResult> getAuthentication()
+        public IActionResult getAuthentication()
         {
-            var a = Startup.Configuration["IDPServer:TokenRequestURL"];
+            //var a = Startup.Configuration["IDPServer:TokenRequestURL"];
             //var idpToken = await _client.PostAsync("http://localhost:60818/api/auth/token", null);
-            var idpToken = await _client.PostAsync(Startup.Configuration["IDPServer:TokenRequestURL"], null);
-            if (idpToken.IsSuccessStatusCode)
-            {
-                //Storing the response details recieved from web api   
-                var authToken = JsonConvert.DeserializeObject<AppToken>(idpToken.Content.ReadAsStringAsync().Result);
-                HttpContext.Session.SetString("authToken", authToken.Token.ToString());
-            }
+            //var idpToken = await _client.PostAsync(Startup.Configuration["IDPServer:TokenRequestURL"], null);
+            //if (idpToken.IsSuccessStatusCode)
+            //{
+            //Storing the response details recieved from web api   
+            //var authToken = JsonConvert.DeserializeObject<AppToken>(idpToken.Content.ReadAsStringAsync().Result);
+            //HttpContext.Session.SetString("authToken", authToken.Token.ToString());
+            //}
+            var currentUserController = new CurrentUsersController();
+            var currentUser=JsonConvert.DeserializeObject<CurrentUser>(currentUserController.Get());
+
+            //create a token and save to session ('authToken');
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.Configuration["IDPServer:IssuerSigningKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+               claims: currentUserController.getCurrentClaims(currentUser),
+               signingCredentials: creds
+            );
+
+
+            var myToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            HttpContext.Session.SetString("authToken", myToken);
+
+
+            System.Diagnostics.Debug.WriteLine(HttpContext.Session.GetString("authToken"));
 
             return Ok();
         }
@@ -85,6 +103,29 @@ namespace SkillsetClient.Controllers
                 HttpContext.Session.SetString("apiToken", authorizationToken);
             }
         }
+
+        #region "FrontEnd Communication"
+
+        //this method will consumed by an angular application
+        //this tokens will be saved either in sessionstorage or localstorage
+        [Produces("application/json")]
+        [Route("api/myToken")]
+        public async Task<List<AppToken>> GetToken()
+        {
+            await SignIn();
+
+            _authToken = HttpContext.Session.GetString("authToken");
+            _apiToken = HttpContext.Session.GetString("apiToken");
+
+            List<AppToken> appTokens = new List<AppToken>();
+            appTokens.Add(new AppToken { Token = _authToken, TokenName = "AuthToken" });
+            appTokens.Add(new AppToken { Token = _apiToken, TokenName = "ApiToken" });
+
+            return appTokens;
+        }
+
+        #endregion
+
 
         public IActionResult Error()
         {
