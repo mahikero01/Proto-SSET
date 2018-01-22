@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using SkillsetClient.Models;
 
@@ -24,7 +28,7 @@ namespace SkillsetClient.Controllers
             var setGroupsController = new SetGroupsController();
             //determine if the user is available 
 
-            var users =setUsersController.Get().Result;
+            var users = setUsersController.Get().Result;
             var groups = setGroupsController.Get().Result;
             var userAccesses = setUserAccessController.Get().Result;
             var user = users.Where(x => x.user_name == username).FirstOrDefault();
@@ -39,12 +43,23 @@ namespace SkillsetClient.Controllers
                 if(userAccess != null)
                 {
                     var group = groups.Where(x => x.grp_id == userAccess.grp_id).FirstOrDefault();
-
                     currentUser.Role = group.grp_name;
                 }
             }
 
             return JsonConvert.SerializeObject(currentUser);
+        }
+
+        //authentication
+        public List<Claim> getCurrentClaims(CurrentUser currentUser)
+        {
+
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.GivenName,currentUser.FirstName));
+            claims.Add(new Claim(ClaimTypes.Surname,currentUser.LastName));
+            claims.Add(new Claim(ClaimTypes.Role,currentUser.Role));
+
+            return claims;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace SkillsetClient.Controllers
         [HttpGet]
         public async Task<SS_Locations[]> Get()
         {
-            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            //_webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var result = await _webApiAccess.GetRequest();
             return JsonConvert.DeserializeObject<SS_Locations[]>(result.ToString());
         }
