@@ -26,5 +26,6 @@ namespace SkillsetAPI.Entities
         public DbSet<Department> Departments { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Skillset> Skillsets { get; set; }
+        public DbSet<DepartmentSkillset> DepartmentSkillsets { get; set; }
     }
 }

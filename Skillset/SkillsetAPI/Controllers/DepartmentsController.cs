@@ -72,7 +72,7 @@ namespace SkillsetAPI.Controllers
             }
 
             return CreatedAtRoute("GetDepartment",
-                    new { id = newDepartmentEntity.DepartmentId }, newDepartmentEntity);
+                    new { id = newDepartmentEntity.DepartmentID }, newDepartmentEntity);
         }
 
         //PUT: api/Departments

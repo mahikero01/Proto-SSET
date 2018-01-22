@@ -70,6 +70,9 @@ namespace SkillsetAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            //this is used for autherization
+            app.UseAuthentication();
+
             //This is for Seeding comment this when ading migration
             skillSetContext.EnsureSeedDataForContext();
 
@@ -92,6 +95,7 @@ namespace SkillsetAPI
                         cfg.CreateMap<Models.SkillsetForCreateDTO, Entities.Skillset>()
                                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
                         cfg.CreateMap<Models.SkillsetForUpdateDTO, Entities.Skillset>();
+                        cfg.CreateMap<Models.DepartmentSkillsetForCreateDTO, Entities.DepartmentSkillset>();
                     });
 
             app.UseMvc();
