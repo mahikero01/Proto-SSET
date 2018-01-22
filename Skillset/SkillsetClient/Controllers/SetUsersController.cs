@@ -24,7 +24,8 @@ namespace SkillsetClient.Controllers
         [HttpGet]
         public async Task<SetUser[]> Get()
         {
-            _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
+            //test 
+            //_webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
             var result = await _webApiAccess.GetRequest();
             return JsonConvert.DeserializeObject<SetUser[]>(result.ToString());
         }
