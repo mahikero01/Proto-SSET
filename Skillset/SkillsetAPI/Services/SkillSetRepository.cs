@@ -89,5 +89,25 @@ namespace SkillsetAPI.Services
         {
             _ctx.Departments.Remove(department);
         }
+
+        public IEnumerable<Location> ReadLocations()
+        {
+            return _ctx.Locations.OrderBy(d => d.LocationDescr).ToList();
+        }
+
+        public Location ReadLocation(int locId)
+        {
+            return _ctx.Locations.Where(d => d.LocationID == locId).FirstOrDefault();
+        }
+
+        public void CreateLocation(Location location)
+        {
+            _ctx.Locations.Add(location);
+        }
+
+        public void DeleteLocation(Location location)
+        {
+            _ctx.Locations.Remove(location);
+        }
     }
 }

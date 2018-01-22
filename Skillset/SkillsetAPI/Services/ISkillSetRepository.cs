@@ -37,5 +37,13 @@ namespace SkillsetAPI.Services
         void CreateDepartment(Department department);
 
         void DeleteDepartment(Department department);
+
+        IEnumerable<Location> ReadLocations();
+
+        Location ReadLocation(int locId);
+
+        void CreateLocation(Location location);
+
+        void DeleteLocation(Location location);
     }
 }
