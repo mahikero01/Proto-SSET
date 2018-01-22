@@ -109,5 +109,25 @@ namespace SkillsetAPI.Services
         {
             _ctx.Locations.Remove(location);
         }
+
+        public IEnumerable<Skillset> ReadSkillsets()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Skillset ReadSkillset(int sklId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateSkillset(Skillset skillset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteSkillset(Skillset skillset)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

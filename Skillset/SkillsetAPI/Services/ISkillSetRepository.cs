@@ -45,5 +45,13 @@ namespace SkillsetAPI.Services
         void CreateLocation(Location location);
 
         void DeleteLocation(Location location);
+
+        IEnumerable<Skillset> ReadSkillsets();
+
+        Skillset ReadSkillset(int sklId);
+
+        void CreateSkillset(Skillset skillset);
+
+        void DeleteSkillset(Skillset skillset);
     }
 }
