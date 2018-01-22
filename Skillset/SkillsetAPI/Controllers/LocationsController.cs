@@ -12,47 +12,47 @@ using SkillsetAPI.Services;
 
 namespace SkillsetAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors("AllowWebClient")]
     [Produces("application/json")]
-    [Route("api/Departments")]
-    public class DepartmentsController : Controller
+    [Route("api/Locations")]
+    public class LocationsController : Controller
     {
         private ISkillSetRepository _skillSetRepository;
 
-        public DepartmentsController(ISkillSetRepository skillSetRepository)
+        public LocationsController(ISkillSetRepository skillSetRepository)
         {
             _skillSetRepository = skillSetRepository;
         }
 
-        // GET: api/Departments
+        // GET: api/Locations
         [HttpGet()]
-        public IActionResult GetDepartments()
+        public IActionResult GetLocations()
         {
-            var departmentsResult = _skillSetRepository.ReadDepartments();
+            var locationsResult = _skillSetRepository.ReadLocations();
 
-            return Ok(departmentsResult);
+            return Ok(locationsResult);
         }
 
-        //GET: api/Departments/{id}
-        [HttpGet("{id}", Name = "GetDepartment")]
-        public IActionResult GetDepartment(int id)
+        //GET: api/Locations/{id}
+        [HttpGet("{id}", Name = "GetLocation")]
+        public IActionResult GetLocation(int id)
         {
-            var departmentResult = _skillSetRepository.ReadDepartment(id);
+            var locationResult = _skillSetRepository.ReadLocation(id);
 
-            if (departmentResult == null)
+            if (locationResult == null)
             {
                 return NotFound();
             }
 
-            return Ok(departmentResult);
+            return Ok(locationResult);
         }
 
-        //POST: api/Departments
+        //POST: api/Locations
         [HttpPost()]
-        public IActionResult PostDepartment([FromBody] DepartmentForCreateDTO department)
+        public IActionResult PostDepartment([FromBody] LocationForCreateDTO location)
         {
-            if (department == null)
+            if (location == null)
             {
                 return BadRequest();
             }
@@ -62,24 +62,24 @@ namespace SkillsetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newDepartmentEntity = Mapper.Map<Entities.Department>(department);
+            var newLocationEntity = Mapper.Map<Entities.Location>(location);
 
-            _skillSetRepository.CreateDepartment(newDepartmentEntity);
+            _skillSetRepository.CreateLocation(newLocationEntity);
 
             if (!_skillSetRepository.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
 
-            return CreatedAtRoute("GetDepartment",
-                    new { id = newDepartmentEntity.DepartmentId }, newDepartmentEntity);
+            return CreatedAtRoute("GetLocation",
+                    new { id = newLocationEntity.LocationID }, newLocationEntity);
         }
 
-        //PUT: api/Departments
+        //PUT: api/Locations
         [HttpPut("{id}")]
-        public IActionResult PutDepartment(int id, [FromBody] DepartmentForUpdateDTO department)
+        public IActionResult PutLocation(int id, [FromBody] LocationForUpdateDTO location)
         {
-            if (department == null)
+            if (location == null)
             {
                 return BadRequest();
             }
@@ -89,13 +89,13 @@ namespace SkillsetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var departmentEntity = _skillSetRepository.ReadDepartment(id);
-            if (departmentEntity == null)
+            var locationEntity = _skillSetRepository.ReadLocation(id);
+            if (locationEntity == null)
             {
                 return NotFound();
             }
 
-            Mapper.Map(department, departmentEntity);
+            Mapper.Map(location, locationEntity);
 
             if (!_skillSetRepository.Save())
             {
@@ -105,17 +105,17 @@ namespace SkillsetAPI.Controllers
             return NoContent();
         }
 
-        //DELETE: api/Departments/{id}
+        //DELETE: api/Locations/{id}
         [HttpDelete("{id}")]
-        public IActionResult DeleteDepartment(int id)
+        public IActionResult DeleteLocation(int id)
         {
-            var departmentEntity = _skillSetRepository.ReadDepartment(id);
-            if (departmentEntity == null)
+            var locationEntity = _skillSetRepository.ReadLocation(id);
+            if (locationEntity == null)
             {
                 return NotFound();
             }
 
-            _skillSetRepository.DeleteDepartment(departmentEntity);
+            _skillSetRepository.DeleteLocation(locationEntity);
 
             if (!_skillSetRepository.Save())
             {

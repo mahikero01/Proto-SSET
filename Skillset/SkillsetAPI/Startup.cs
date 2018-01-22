@@ -45,6 +45,12 @@ namespace SkillsetAPI
                 };
             });
 
+            services.AddCors(
+                    opt => 
+                    {
+                        opt.AddPolicy("AllowWebClient", c => c.WithOrigins("http://localhost:60812"));
+                    });
+
             services.AddMvc();
             //Use for migration only, then comment all statement in DB context constructor
             //var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=dbbtSSetp1;Trusted_Connection=True";
@@ -80,6 +86,9 @@ namespace SkillsetAPI
                         cfg.CreateMap<Models.DepartmentForCreateDTO, Entities.Department>()
                                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
                         cfg.CreateMap<Models.DepartmentForUpdateDTO, Entities.Department>();
+                        cfg.CreateMap<Models.LocationForCreateDTO, Entities.Location>()
+                                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
+                        cfg.CreateMap<Models.LocationForUpdateDTO, Entities.Location>();
                     });
 
             app.UseMvc();

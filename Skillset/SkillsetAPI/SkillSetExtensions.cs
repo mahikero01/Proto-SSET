@@ -18,6 +18,8 @@ namespace SkillsetAPI
             SeedSetGroupAccess(ctx);
             SeedAssociate(ctx);
             SeedDepartment(ctx);
+            SeedLocation(ctx);
+            SeedSkillset(ctx);
         }
 
         private static void SeedSetUsers(SkillSetContext ctx)
@@ -227,5 +229,56 @@ namespace SkillsetAPI
             ctx.Departments.AddRange(departments);
             ctx.SaveChanges();
         }
+
+        private static void SeedLocation(SkillSetContext ctx)
+        {
+            if (ctx.Locations.Any())
+            {
+                return;
+            }
+
+            var locations = new List<Location>()
+                    {
+                        new Location()
+                        {
+                            LocationDescr = "Boston",
+                            IsActive = true
+                        },
+                        new Location()
+                        {
+                            LocationDescr = "Toronto",
+                            IsActive = true
+                        }
+                    };
+
+            ctx.Locations.AddRange(locations);
+            ctx.SaveChanges();
+        }
+
+        private static void SeedSkillset(SkillSetContext ctx)
+        {
+            if (ctx.Skillsets.Any())
+            {
+                return;
+            }
+
+            var skillsets = new List<Skillset>()
+                    {
+                        new Skillset()
+                        {
+                            SkillsetDescr = "Windows",
+                            IsActive = true
+                        },
+                        new Skillset()
+                        {
+                            SkillsetDescr = "Linux",
+                            IsActive = true
+                        }
+                    };
+
+            ctx.Skillsets.AddRange(skillsets);
+            ctx.SaveChanges();
+        }
+
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkillsetAPI.Entities;
@@ -11,6 +13,8 @@ using SkillsetAPI.Services;
 
 namespace SkillsetAPI.Controllers
 {
+    [Authorize]
+    [EnableCors("AllowWebClient")]
     [Produces("application/json")]
     [Route("api/Associates")]
     public class AssociatesController : Controller
@@ -61,8 +65,6 @@ namespace SkillsetAPI.Controllers
 
             var newAssociateEntity = Mapper.Map<Entities.Associate> (associate);
 
-            //newAssociateEntity.UpdatedOn = DateTime.Now;
-            //newAssociateEntity.IsActive = true;
             _skillSetRepository.CreateAssociate(newAssociateEntity);
 
             if (!_skillSetRepository.Save())
@@ -95,7 +97,6 @@ namespace SkillsetAPI.Controllers
             }
 
             Mapper.Map(associate, associateEntity);
-            //associateEntity.UpdatedOn = DateTime.Now;
 
             if (!_skillSetRepository.Save())
             {

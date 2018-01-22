@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkillsetAPI.Models;
@@ -10,6 +12,8 @@ using SkillsetAPI.Services;
 
 namespace SkillsetAPI.Controllers
 {
+    [Authorize]
+    [EnableCors("AllowWebClient")]
     [Produces("application/json")]
     [Route("api/SetGroups")]
     public class SetGroupsController : Controller
