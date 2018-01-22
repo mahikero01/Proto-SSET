@@ -20,7 +20,7 @@ namespace SkillsetClient.Controllers
 
         public ApiAccess(string controller)
         {
-            _apiURL = Startup.Configuration["WebApiServer:ApiURL"] ;
+            _apiURL = Startup.Configuration["WebApiServer:ApiURL"];
             _apiURL = _apiURL + "/" + controller;
             
             //instantiate client

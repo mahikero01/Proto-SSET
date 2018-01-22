@@ -52,7 +52,6 @@ namespace SkillsetAPI
                     });
 
             services.AddMvc();
-
             //Use for migration only, then comment all statement in DB context constructor
             //var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=dbbtSSetp1;Trusted_Connection=True";
             //Use below in Production
