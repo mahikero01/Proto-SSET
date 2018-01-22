@@ -11,7 +11,7 @@ using SkillsetAPI.Services;
 
 namespace SkillsetAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors("AllowWebClient")]
     [Produces("application/json")]
     [Route("api/SetUserAccesses")]
