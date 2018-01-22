@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkillsetAPI.Models;
@@ -10,6 +11,7 @@ using SkillsetAPI.Services;
 
 namespace SkillsetAPI.Controllers
 {
+    [EnableCors("AllowWebClient")]
     [Produces("application/json")]
     [Route("api/Departments")]
     public class DepartmentsController : Controller

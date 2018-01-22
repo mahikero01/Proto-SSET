@@ -45,6 +45,12 @@ namespace SkillsetAPI
                 };
             });
 
+            services.AddCors(
+                    opt => 
+                    {
+                        opt.AddPolicy("AllowWebClient", c => c.WithOrigins("http://localhost:60812"));
+                    });
+
             services.AddMvc();
 
             //Use for migration only, then comment all statement in DB context constructor
