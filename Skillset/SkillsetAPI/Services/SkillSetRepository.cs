@@ -77,7 +77,7 @@ namespace SkillsetAPI.Services
 
         public Department ReadDepartment(int depId)
         {
-            return _ctx.Departments.Where(d => d.DepartmentId == depId).FirstOrDefault();
+            return _ctx.Departments.Where(d => d.DepartmentID == depId).FirstOrDefault();
         }
 
         public void CreateDepartment(Department department)
@@ -128,6 +128,26 @@ namespace SkillsetAPI.Services
         public void DeleteSkillset(Skillset skillset)
         {
             _ctx.Skillsets.Remove(skillset);
+        }
+
+        public IEnumerable<DepartmentSkillset> ReadDepartmentSkillsets()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DepartmentSkillset ReadDepartmentSkillset(int dptSklId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateDepartmentSkillset(DepartmentSkillset departmentSkillset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteDepartmentSkillset(DepartmentSkillset departmentSkillset)
+        {
+            throw new NotImplementedException();
         }
     }
 }
