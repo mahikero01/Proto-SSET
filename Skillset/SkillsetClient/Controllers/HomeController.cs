@@ -110,7 +110,7 @@ namespace SkillsetClient.Controllers
         //this tokens will be saved either in sessionstorage or localstorage
         [Produces("application/json")]
         [Route("api/myToken")]
-        public async Task<List<AppToken>> GetToken()
+        public async Task<string> GetToken()
         {
             await SignIn();
 
@@ -121,7 +121,7 @@ namespace SkillsetClient.Controllers
             appTokens.Add(new AppToken { Token = _authToken, TokenName = "AuthToken" });
             appTokens.Add(new AppToken { Token = _apiToken, TokenName = "ApiToken" });
 
-            return appTokens;
+            return JsonConvert.SerializeObject(appTokens);
         }
 
         #endregion
