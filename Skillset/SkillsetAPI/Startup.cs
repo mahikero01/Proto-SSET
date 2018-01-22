@@ -38,9 +38,10 @@ namespace SkillsetAPI
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "http://localhost:60812",
-                    ValidAudience = "http://localhost:59059/",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("03fb1760-a45f-4473-bed4-aab1e8d7e87a")),
+                    ValidIssuer = Startup.Configuration["JWT:ValidIssuer"],
+                    ValidAudience = Startup.Configuration["JWT:ValidAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Startup.Configuration["JWT:IssuerSigningKey"])),
                 };
             });
 
@@ -72,9 +73,13 @@ namespace SkillsetAPI
                     {
                         cfg.CreateMap<Entities.SetUser, Models.SetUserDTO>();
                         cfg.CreateMap<Entities.SetGroup, Models.SetGroupDTO>();
-                        cfg.CreateMap<Models.AssociateForCreateDTO, Entities.Associate>();
-                        cfg.CreateMap<Models.AssociateForUpdateDTO, Entities.Associate>();
-                        cfg.CreateMap<Models.DepartmentForCreateDTO, Entities.Department>();
+                        cfg.CreateMap<Models.AssociateForCreateDTO, Entities.Associate>()
+                                .ForMember(dest => dest.UpdatedOn, opt => opt.Equals(DateTime.Now))
+                                .ForMember(dest => dest.IsActive, opt => opt.Equals(true));
+                        cfg.CreateMap<Models.AssociateForUpdateDTO, Entities.Associate>()
+                                .ForMember(dest => dest.UpdatedOn, opt => opt.Equals(DateTime.Now));
+                        cfg.CreateMap<Models.DepartmentForCreateDTO, Entities.Department>()
+                                .ForMember(dest => dest.IsActive, opt => opt.Equals(true));
                         cfg.CreateMap<Models.DepartmentForUpdateDTO, Entities.Department>();
                     });
 

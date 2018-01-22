@@ -61,8 +61,8 @@ namespace SkillsetAPI.Controllers
 
             var newAssociateEntity = Mapper.Map<Entities.Associate> (associate);
 
-            newAssociateEntity.UpdatedOn = DateTime.Now;
-            newAssociateEntity.IsActive = true;
+            //newAssociateEntity.UpdatedOn = DateTime.Now;
+            //newAssociateEntity.IsActive = true;
             _skillSetRepository.CreateAssociate(newAssociateEntity);
 
             if (!_skillSetRepository.Save())
@@ -95,7 +95,7 @@ namespace SkillsetAPI.Controllers
             }
 
             Mapper.Map(associate, associateEntity);
-            associateEntity.UpdatedOn = DateTime.Now;
+            //associateEntity.UpdatedOn = DateTime.Now;
 
             if (!_skillSetRepository.Save())
             {
