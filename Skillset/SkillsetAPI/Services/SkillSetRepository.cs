@@ -112,22 +112,22 @@ namespace SkillsetAPI.Services
 
         public IEnumerable<Skillset> ReadSkillsets()
         {
-            throw new NotImplementedException();
+            return _ctx.Skillsets.OrderBy(d => d.SkillsetDescr).ToList();
         }
 
         public Skillset ReadSkillset(int sklId)
         {
-            throw new NotImplementedException();
+            return _ctx.Skillsets.Where(d => d.SkillsetID == sklId).FirstOrDefault();
         }
 
         public void CreateSkillset(Skillset skillset)
         {
-            throw new NotImplementedException();
+            _ctx.Skillsets.Add(skillset);
         }
 
         public void DeleteSkillset(Skillset skillset)
         {
-            throw new NotImplementedException();
+            _ctx.Skillsets.Remove(skillset);
         }
     }
 }

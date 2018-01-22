@@ -89,6 +89,9 @@ namespace SkillsetAPI
                         cfg.CreateMap<Models.LocationForCreateDTO, Entities.Location>()
                                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
                         cfg.CreateMap<Models.LocationForUpdateDTO, Entities.Location>();
+                        cfg.CreateMap<Models.SkillsetForCreateDTO, Entities.Skillset>()
+                                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(o => true));
+                        cfg.CreateMap<Models.SkillsetForUpdateDTO, Entities.Skillset>();
                     });
 
             app.UseMvc();

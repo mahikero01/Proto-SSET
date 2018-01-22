@@ -15,44 +15,44 @@ namespace SkillsetAPI.Controllers
     [Authorize]
     [EnableCors("AllowWebClient")]
     [Produces("application/json")]
-    [Route("api/Locations")]
-    public class LocationsController : Controller
+    [Route("api/Skillsets")]
+    public class SkillsetsController : Controller
     {
         private ISkillSetRepository _skillSetRepository;
 
-        public LocationsController(ISkillSetRepository skillSetRepository)
+        public SkillsetsController(ISkillSetRepository skillSetRepository)
         {
             _skillSetRepository = skillSetRepository;
         }
 
-        // GET: api/Locations
+        // GET: api/Skillsets
         [HttpGet()]
-        public IActionResult GetLocations()
+        public IActionResult GetSkillsets()
         {
-            var locationsResult = _skillSetRepository.ReadLocations();
+            var skillsetssResult = _skillSetRepository.ReadSkillsets();
 
-            return Ok(locationsResult);
+            return Ok(skillsetssResult);
         }
 
-        //GET: api/Locations/{id}
-        [HttpGet("{id}", Name = "GetLocation")]
-        public IActionResult GetLocation(int id)
+        //GET: api/Skillsets/{id}
+        [HttpGet("{id}", Name = "GetSkillset")]
+        public IActionResult GetSkillset(int id)
         {
-            var locationResult = _skillSetRepository.ReadLocation(id);
+            var skillsetResult = _skillSetRepository.ReadSkillset(id);
 
-            if (locationResult == null)
+            if (skillsetResult == null)
             {
                 return NotFound();
             }
 
-            return Ok(locationResult);
+            return Ok(skillsetResult);
         }
 
-        //POST: api/Locations
+        //POST: api/Skillsets
         [HttpPost()]
-        public IActionResult PostDepartment([FromBody] LocationForCreateDTO location)
+        public IActionResult PostSkillset([FromBody] SkillsetForCreateDTO skillset)
         {
-            if (location == null)
+            if (skillset == null)
             {
                 return BadRequest();
             }
@@ -62,9 +62,9 @@ namespace SkillsetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newLocationEntity = Mapper.Map<Entities.Location>(location);
+            var newSkillsetEntity = Mapper.Map<Entities.Skillset>(skillset);
 
-            _skillSetRepository.CreateLocation(newLocationEntity);
+            _skillSetRepository.CreateSkillset(newSkillsetEntity);
 
             if (!_skillSetRepository.Save())
             {
@@ -72,14 +72,14 @@ namespace SkillsetAPI.Controllers
             }
 
             return CreatedAtRoute("GetLocation",
-                    new { id = newLocationEntity.LocationID }, newLocationEntity);
+                    new { id = newSkillsetEntity.SkillsetID }, newSkillsetEntity);
         }
 
-        //PUT: api/Locations
+        //PUT: api/Skillsets
         [HttpPut("{id}")]
-        public IActionResult PutLocation(int id, [FromBody] LocationForUpdateDTO location)
+        public IActionResult Putskillset(int id, [FromBody] SkillsetForUpdateDTO skillset)
         {
-            if (location == null)
+            if (skillset == null)
             {
                 return BadRequest();
             }
@@ -89,13 +89,13 @@ namespace SkillsetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var locationEntity = _skillSetRepository.ReadLocation(id);
-            if (locationEntity == null)
+            var skillsetEntity = _skillSetRepository.ReadSkillset(id);
+            if (skillsetEntity == null)
             {
                 return NotFound();
             }
 
-            Mapper.Map(location, locationEntity);
+            Mapper.Map(skillset, skillsetEntity);
 
             if (!_skillSetRepository.Save())
             {
@@ -105,17 +105,17 @@ namespace SkillsetAPI.Controllers
             return NoContent();
         }
 
-        //DELETE: api/Locations/{id}
+        //DELETE: api/Skillsets/{id}
         [HttpDelete("{id}")]
-        public IActionResult DeleteLocation(int id)
+        public IActionResult DeleteSkillset(int id)
         {
-            var locationEntity = _skillSetRepository.ReadLocation(id);
-            if (locationEntity == null)
+            var skillsetEntity = _skillSetRepository.ReadSkillset(id);
+            if (skillsetEntity == null)
             {
                 return NotFound();
             }
 
-            _skillSetRepository.DeleteLocation(locationEntity);
+            _skillSetRepository.DeleteSkillset(skillsetEntity);
 
             if (!_skillSetRepository.Save())
             {
