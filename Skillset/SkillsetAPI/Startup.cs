@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using SkillsetAPI.Entities;
 using SkillsetAPI.Services;
 
@@ -51,7 +52,18 @@ namespace SkillsetAPI
                         opt.AddPolicy("AllowWebClient", c => c.WithOrigins("http://localhost:60812"));
                     });
 
-            services.AddMvc();
+            //this will make JSON as statement case
+            services.AddMvc()
+                    .AddJsonOptions(o => 
+                    {
+                        if (o.SerializerSettings.ContractResolver != null)
+                        {
+                            var castedResolver = o.SerializerSettings.ContractResolver
+                                    as DefaultContractResolver;
+                            castedResolver.NamingStrategy = null;
+                        }
+                    });
+
             //Use for migration only, then comment all statement in DB context constructor
             //var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=dbbtSSetp1;Trusted_Connection=True";
             //Use below in Production
