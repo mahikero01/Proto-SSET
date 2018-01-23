@@ -19,7 +19,7 @@ namespace SkillsetClient.Controllers
     {
         // GET: api/CurrentUsers
         [HttpGet]
-        public string Get()
+        public CurrentUser Get()
         {
             CurrentUser currentUser = new CurrentUser();
             var username = Environment.UserName;
@@ -47,7 +47,7 @@ namespace SkillsetClient.Controllers
                 }
             }
 
-            return JsonConvert.SerializeObject(currentUser);
+            return currentUser;
         }
 
         //authentication
