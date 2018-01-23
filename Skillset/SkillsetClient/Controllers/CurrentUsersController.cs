@@ -35,6 +35,7 @@ namespace SkillsetClient.Controllers
 
             if (user != null)
             {
+                currentUser.UserID = user.user_id;
                 currentUser.FirstName = user.user_first_name;
                 currentUser.LastName = user.user_last_name;
 
