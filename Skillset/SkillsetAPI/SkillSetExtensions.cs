@@ -21,6 +21,7 @@ namespace SkillsetAPI
             SeedLocation(ctx);
             SeedSkillset(ctx);
             SeedDepartmentSkillsets(ctx);
+            SeedAssociateSeedDepartmentSkillsets(ctx);
         }
 
         private static void SeedSetUsers(SkillSetContext ctx)
@@ -304,6 +305,31 @@ namespace SkillsetAPI
                         }
                     };
             ctx.DepartmentSkillsets.AddRange(departmentSkillsets);
+            ctx.SaveChanges();
+        }
+
+        private static void SeedAssociateSeedDepartmentSkillsets(SkillSetContext ctx)
+        {
+            if (ctx.AssociateDepartmentSkillsets.Any())
+            {
+                return;
+            }
+
+            var associateDepartmentSkillsets = new List<AssociateDepartmentSkillset>()
+                    {
+                        new AssociateDepartmentSkillset()
+                        {
+                            AssociateID = 1,
+                            DepartmentSkillsetID = 1
+                        },
+                        new AssociateDepartmentSkillset()
+                        {
+                            AssociateID = 2,
+                            DepartmentSkillsetID = 2
+                        }
+                    };
+
+            ctx.AssociateDepartmentSkillsets.AddRange(associateDepartmentSkillsets);
             ctx.SaveChanges();
         }
     }

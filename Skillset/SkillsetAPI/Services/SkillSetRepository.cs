@@ -149,5 +149,25 @@ namespace SkillsetAPI.Services
         {
             _ctx.DepartmentSkillsets.Remove(departmentSkillset);
         }
+
+        public IEnumerable<AssociateDepartmentSkillset> ReadAssociateDepartmentSkillsets()
+        {
+            return _ctx.AssociateDepartmentSkillsets.OrderBy(d => d.AssociateDepartmentSkillsetID).ToList();
+        }
+
+        public AssociateDepartmentSkillset ReadAssociateDepartmentSkillset(int assDptSklId)
+        {
+            return _ctx.AssociateDepartmentSkillsets.Where(d => d.AssociateDepartmentSkillsetID == assDptSklId).FirstOrDefault();
+        }
+
+        public void CreateAssociateDepartmentSkillset(AssociateDepartmentSkillset associateDepartmentSkillset)
+        {
+            _ctx.AssociateDepartmentSkillsets.Add(associateDepartmentSkillset);
+        }
+
+        public void DeleteAssociateDepartmentSkillset(AssociateDepartmentSkillset associateDepartmentSkillset)
+        {
+            _ctx.AssociateDepartmentSkillsets.Remove(associateDepartmentSkillset);
+        }
     }
 }

@@ -61,5 +61,13 @@ namespace SkillsetAPI.Services
         void CreateDepartmentSkillset(DepartmentSkillset departmentSkillset);
 
         void DeleteDepartmentSkillset(DepartmentSkillset departmentSkillset);
+
+        IEnumerable<AssociateDepartmentSkillset> ReadAssociateDepartmentSkillsets();
+
+        AssociateDepartmentSkillset ReadAssociateDepartmentSkillset(int assDptSklId);
+
+        void CreateAssociateDepartmentSkillset(AssociateDepartmentSkillset associateDepartmentSkillset);
+
+        void DeleteAssociateDepartmentSkillset(AssociateDepartmentSkillset associateDepartmentSkillset);
     }
 }
