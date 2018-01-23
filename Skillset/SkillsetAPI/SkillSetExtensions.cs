@@ -320,12 +320,14 @@ namespace SkillsetAPI
                         new AssociateDepartmentSkillset()
                         {
                             AssociateID = 1,
-                            DepartmentSkillsetID = 1
+                            DepartmentSkillsetID = 1,
+                            LastWorkedOn=""
                         },
                         new AssociateDepartmentSkillset()
                         {
                             AssociateID = 2,
-                            DepartmentSkillsetID = 2
+                            DepartmentSkillsetID = 2,
+                            LastWorkedOn=""
                         }
                     };
 
