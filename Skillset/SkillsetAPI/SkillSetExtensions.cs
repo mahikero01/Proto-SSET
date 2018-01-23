@@ -296,12 +296,12 @@ namespace SkillsetAPI
                         new DepartmentSkillset()
                         {
                             DepartmentID = 1,
-                            SkilsetID = 1
+                            SkillsetID = 1
                         },
                         new DepartmentSkillset()
                         {
                             DepartmentID = 2,
-                            SkilsetID = 2
+                            SkillsetID = 2
                         }
                     };
             ctx.DepartmentSkillsets.AddRange(departmentSkillsets);

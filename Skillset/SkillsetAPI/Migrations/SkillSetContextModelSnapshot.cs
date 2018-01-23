@@ -86,7 +86,7 @@ namespace SkillsetAPI.Migrations
 
                     b.Property<int>("DepartmentID");
 
-                    b.Property<int>("SkilsetID");
+                    b.Property<int>("SkillsetID");
 
                     b.HasKey("DepartmentSkillsetID");
 

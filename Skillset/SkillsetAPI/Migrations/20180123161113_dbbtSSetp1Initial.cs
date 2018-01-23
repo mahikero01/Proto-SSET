@@ -144,7 +144,7 @@ namespace SkillsetAPI.Migrations
                     DepartmentSkillsetID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DepartmentID = table.Column<int>(nullable: false),
-                    SkilsetID = table.Column<int>(nullable: false)
+                    SkillsetID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
