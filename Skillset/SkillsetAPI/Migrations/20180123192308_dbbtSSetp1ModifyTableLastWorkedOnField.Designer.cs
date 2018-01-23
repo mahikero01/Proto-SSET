@@ -11,9 +11,10 @@ using System;
 namespace SkillsetAPI.Migrations
 {
     [DbContext(typeof(SkillSetContext))]
-    partial class SkillSetContextModelSnapshot : ModelSnapshot
+    [Migration("20180123192308_dbbtSSetp1ModifyTableLastWorkedOnField")]
+    partial class dbbtSSetp1ModifyTableLastWorkedOnField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

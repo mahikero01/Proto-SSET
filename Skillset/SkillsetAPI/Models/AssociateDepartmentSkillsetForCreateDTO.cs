@@ -13,5 +13,9 @@ namespace SkillsetAPI.Models
 
         [Required]
         public int DepartmentSkillsetID { get; set; }
+
+        [Required]
+        [MaxLength(30)]
+        public string LastWorkedOn { get; set; }
     }
 }

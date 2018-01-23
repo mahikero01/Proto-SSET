@@ -18,6 +18,10 @@ namespace SkillsetAPI.Entities
         public int AssociateID { get; set; }
 
         [Required]
-        public int DepartmentSkillsetID { get; set; }  
+        public int DepartmentSkillsetID { get; set; }
+
+        [Required]
+        [MaxLength(30)]
+        public string LastWorkedOn { get; set; }
     }
 }
