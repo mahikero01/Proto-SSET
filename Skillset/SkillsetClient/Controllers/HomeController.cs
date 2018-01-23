@@ -66,7 +66,7 @@ namespace SkillsetClient.Controllers
             //HttpContext.Session.SetString("authToken", authToken.Token.ToString());
             //}
             var currentUserController = new CurrentUsersController();
-            var currentUser=JsonConvert.DeserializeObject<CurrentUser>(currentUserController.Get());
+            var currentUser=currentUserController.Get();
 
             //create a token and save to session ('authToken');
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.Configuration["IDPServer:IssuerSigningKey"]));
