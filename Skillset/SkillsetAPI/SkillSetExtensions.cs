@@ -49,7 +49,7 @@ namespace SkillsetAPI
                         new SetUser()
                         {
                             user_id = "USER-20171128-002",
-                            user_name = "alvarer",
+                            user_name = "alverer",
                             user_last_name = "Alvarez",
                             user_first_name = "Eros",
                             user_middle_name = "K",
