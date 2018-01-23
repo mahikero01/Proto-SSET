@@ -11,8 +11,8 @@ using System;
 namespace SkillsetAPI.Migrations
 {
     [DbContext(typeof(SkillSetContext))]
-    [Migration("20180118182258_dbbtSSetp1ModifyTableNameSet_Group_Access")]
-    partial class dbbtSSetp1ModifyTableNameSet_Group_Access
+    [Migration("20180123161113_dbbtSSetp1Initial")]
+    partial class dbbtSSetp1Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,95 @@ namespace SkillsetAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("SkillsetAPI.Entities.Associate", b =>
+                {
+                    b.Property<int>("AssociateID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DepartmentID");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<int>("LocationID");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20);
+
+                    b.Property<DateTime>("UpdatedOn");
+
+                    b.Property<string>("UserID")
+                        .HasMaxLength(25);
+
+                    b.Property<bool>("VPN");
+
+                    b.HasKey("AssociateID");
+
+                    b.ToTable("SS_Associates");
+                });
+
+            modelBuilder.Entity("SkillsetAPI.Entities.AssociateDepartmentSkillset", b =>
+                {
+                    b.Property<int>("AssociateDepartmentSkillsetID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AssociateID");
+
+                    b.Property<int>("DepartmentSkillsetID");
+
+                    b.HasKey("AssociateDepartmentSkillsetID");
+
+                    b.ToTable("SS_AssociateDepartmentSkillsets");
+                });
+
+            modelBuilder.Entity("SkillsetAPI.Entities.Department", b =>
+                {
+                    b.Property<int>("DepartmentID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DepartmentDescr")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("DepartmentID");
+
+                    b.ToTable("SS_Departments");
+                });
+
+            modelBuilder.Entity("SkillsetAPI.Entities.DepartmentSkillset", b =>
+                {
+                    b.Property<int>("DepartmentSkillsetID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DepartmentID");
+
+                    b.Property<int>("SkilsetID");
+
+                    b.HasKey("DepartmentSkillsetID");
+
+                    b.ToTable("SS_DepartmentSkillsets");
+                });
+
+            modelBuilder.Entity("SkillsetAPI.Entities.Location", b =>
+                {
+                    b.Property<int>("LocationID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("LocationDescr")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.HasKey("LocationID");
+
+                    b.ToTable("SS_Locations");
+                });
 
             modelBuilder.Entity("SkillsetAPI.Entities.SetGroup", b =>
                 {
@@ -61,7 +150,7 @@ namespace SkillsetAPI.Migrations
 
                     b.HasKey("grp_mod_id");
 
-                    b.ToTable("SetGroupAccesses");
+                    b.ToTable("set_group_access");
                 });
 
             modelBuilder.Entity("SkillsetAPI.Entities.SetModule", b =>
@@ -130,6 +219,22 @@ namespace SkillsetAPI.Migrations
                     b.HasKey("user_grp_id");
 
                     b.ToTable("set_user_access");
+                });
+
+            modelBuilder.Entity("SkillsetAPI.Entities.Skillset", b =>
+                {
+                    b.Property<int>("SkillsetID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("SkillsetDescr")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("SkillsetID");
+
+                    b.ToTable("SS_Skillsets");
                 });
 #pragma warning restore 612, 618
         }

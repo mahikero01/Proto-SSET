@@ -70,7 +70,7 @@ namespace SkillsetAPI
             var connectionString = Startup.Configuration["connectionStrings:dbbtSSetp1ConnectionString"];
 
             services.AddDbContext<SkillSetContext>(o => o.UseSqlServer(connectionString));
-
+            //comment this out when creating new migration
             services.AddScoped<ISkillSetRepository, SkillSetRepository>();
         }
 
@@ -85,7 +85,7 @@ namespace SkillsetAPI
             //this is used for autherization
             app.UseAuthentication();
 
-            //This is for Seeding comment this when ading migration
+            //This is for Seeding comment this when ading migration, comment this out when creating new migration
             skillSetContext.EnsureSeedDataForContext();
 
             AutoMapper.Mapper.Initialize(
