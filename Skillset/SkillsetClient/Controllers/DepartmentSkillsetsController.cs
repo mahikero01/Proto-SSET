@@ -33,7 +33,7 @@ namespace SkillsetClient.Controllers
         public async Task<SS_DepartmentSkillsets> Get(int id)
         {
             _webApiAccess.AssignAuthorization(HttpContext.Session.GetString("apiToken"));
-            var result = await _webApiAccess.GetRequest();
+            var result = await _webApiAccess.GetRequest(id.ToString());
             return JsonConvert.DeserializeObject<SS_DepartmentSkillsets>(result.ToString());
         }
 
