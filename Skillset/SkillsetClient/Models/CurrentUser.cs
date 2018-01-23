@@ -11,5 +11,13 @@ namespace SkillsetClient.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; }
+
+        public CurrentUser()
+        {
+            UserID = "";
+            FirstName = "";
+            LastName = "";
+            Role = "";
+        }
     }
 }
