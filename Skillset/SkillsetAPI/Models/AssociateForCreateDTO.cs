@@ -8,6 +8,10 @@ namespace SkillsetAPI.Models
 {
     public class AssociateForCreateDTO
     {
+        [Required(ErrorMessage = "No FullName")]
+        [MaxLength(100)]
+        public string FullName { get; set; }
+
         [Required(ErrorMessage = "No UserID")]
         [MaxLength(25)]
         public string UserID { get; set; }

@@ -12,6 +12,6 @@ namespace SkillsetAPI.Models
         public int DepartmentID { get; set; }
 
         [Required]
-        public int SkilsetID { get; set; }
+        public int SkillsetID { get; set; }
     }
 }
