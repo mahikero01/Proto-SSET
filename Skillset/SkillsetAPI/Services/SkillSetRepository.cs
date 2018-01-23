@@ -132,22 +132,22 @@ namespace SkillsetAPI.Services
 
         public IEnumerable<DepartmentSkillset> ReadDepartmentSkillsets()
         {
-            throw new NotImplementedException();
+            return _ctx.DepartmentSkillsets.OrderBy(d => d.DepartmentSkillsetID).ToList();
         }
 
         public DepartmentSkillset ReadDepartmentSkillset(int dptSklId)
         {
-            throw new NotImplementedException();
+            return _ctx.DepartmentSkillsets.Where(d => d.DepartmentSkillsetID == dptSklId).FirstOrDefault();
         }
 
         public void CreateDepartmentSkillset(DepartmentSkillset departmentSkillset)
         {
-            throw new NotImplementedException();
+            _ctx.DepartmentSkillsets.Add(departmentSkillset);
         }
 
         public void DeleteDepartmentSkillset(DepartmentSkillset departmentSkillset)
         {
-            throw new NotImplementedException();
+            _ctx.DepartmentSkillsets.Remove(departmentSkillset);
         }
     }
 }

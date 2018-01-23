@@ -77,7 +77,7 @@ namespace SkillsetAPI.Controllers
 
         //PUT: api/Skillsets
         [HttpPut("{id}")]
-        public IActionResult Putskillset(int id, [FromBody] SkillsetForUpdateDTO skillset)
+        public IActionResult PutSkillset(int id, [FromBody] SkillsetForUpdateDTO skillset)
         {
             if (skillset == null)
             {
