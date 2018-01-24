@@ -33,16 +33,16 @@ namespace SkillsetClient.Controllers
 
         public IActionResult Index()
         {
-            //_authToken = HttpContext.Session.GetString("authToken");
-            //var a = HttpContext.Session.Get("authToken");
-            //if (_authToken == null)
-            //{
-            //    //get token for authentication
-            //    //change route to signIn
-            //    //this will create a token that can communicate to web api
-            //    //save to session
-            //    return Redirect("Home/SignIn");
-            //}
+            _authToken = HttpContext.Session.GetString("authToken");
+            var a = HttpContext.Session.Get("authToken");
+            if (_authToken == null)
+            {
+                //get token for authentication
+                //change route to signIn
+                //this will create a token that can communicate to web api
+                //save to session
+                return Redirect("Home/SignIn");
+            }
             return View();
         }
         public async Task<IActionResult> SignIn()
