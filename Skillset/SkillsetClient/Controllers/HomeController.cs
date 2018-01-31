@@ -23,7 +23,7 @@ namespace SkillsetClient.Controllers
         private string _apiToken;
         private HttpClient _client;
         private TokenFactory _tokenFactory;
-        public string sample="sdaf";
+        public string sample = "sdaf";
 
         public HomeController()
         {
@@ -45,7 +45,7 @@ namespace SkillsetClient.Controllers
             }
             return View();
         }
-        public async Task<IActionResult> SignIn()
+        public IActionResult SignIn()
         {
             //request a post to IDP server to gain an AuthToken
             getAuthentication();
@@ -66,7 +66,7 @@ namespace SkillsetClient.Controllers
             //HttpContext.Session.SetString("authToken", authToken.Token.ToString());
             //}
             var currentUserController = new CurrentUsersController();
-            var currentUser=currentUserController.Get();
+            var currentUser = currentUserController.Get();
 
             //create a token and save to session ('authToken');
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.Configuration["IDPServer:IssuerSigningKey"]));
@@ -110,9 +110,9 @@ namespace SkillsetClient.Controllers
         //this tokens will be saved either in sessionstorage or localstorage
         [Produces("application/json")]
         [Route("api/myToken")]
-        public async Task<string> GetToken()
+        public string GetToken()
         {
-            await SignIn();
+            SignIn();
 
             _authToken = HttpContext.Session.GetString("authToken");
             _apiToken = HttpContext.Session.GetString("apiToken");
