@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using SkillsetAPI.Entities;
 using SkillsetAPI.Services;
+using System;
+using System.Text;
 
 namespace SkillsetAPI
 {
@@ -30,6 +25,8 @@ namespace SkillsetAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var a = Startup.Configuration["JWT:ValidIssuer"];
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -47,14 +44,14 @@ namespace SkillsetAPI
             });
 
             services.AddCors(
-                    opt => 
+                    opt =>
                     {
                         opt.AddPolicy("AllowWebClient", c => c.WithOrigins("http://localhost:60812"));
                     });
 
             //this will make JSON as statement case
             services.AddMvc()
-                    .AddJsonOptions(o => 
+                    .AddJsonOptions(o =>
                     {
                         if (o.SerializerSettings.ContractResolver != null)
                         {
@@ -89,7 +86,7 @@ namespace SkillsetAPI
             skillSetContext.EnsureSeedDataForContext();
 
             AutoMapper.Mapper.Initialize(
-                    cfg => 
+                    cfg =>
                     {
                         cfg.CreateMap<Entities.SetUser, Models.SetUserDTO>();
                         cfg.CreateMap<Entities.SetGroup, Models.SetGroupDTO>();
